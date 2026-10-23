@@ -29,6 +29,9 @@ try {
     await run('tar', ['-xzf', path.join(staging, 'source.tar.gz'), '--strip-components=1', '-C', path.join(staging, 'source')]);
     const extracted = path.join(staging, 'source');
     if (hash(await fs.readFile(path.join(extracted, 'Cargo.lock'))) !== lock.cargoLockSha256) throw Error('Upstream Cargo.lock checksum mismatch.');
+    // git apply otherwise discovers the launcher's parent repository and silently
+    // skips Git-format patches whose paths are outside the current subdirectory.
+    await run('git', ['init', '--quiet'], extracted);
     for (const patch of lock.patches) {
       const file = path.join(root, 'assets', patch.file);
       if (hash(await fs.readFile(file)) !== patch.sha256) throw Error(`Patch checksum mismatch: ${patch.file}`);
