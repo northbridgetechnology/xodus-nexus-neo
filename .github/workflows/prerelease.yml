@@ -1,0 +1,114 @@
+name: Build Neo prerelease
+on:
+  push:
+    branches: ['release/**']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: neo-prerelease-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: macos-14
+    timeout-minutes: 60
+    permissions:
+      contents: read
+      statuses: write
+    env:
+      HOMEBREW_NO_AUTO_UPDATE: '1'
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - name: Report release build started
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api "repos/$GITHUB_REPOSITORY/statuses/$GITHUB_SHA" -f state=pending -f context='Neo prerelease' -f description='Building and validating Apple Silicon release' -f target_url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Install build prerequisites
+        run: |
+          test "$(uname -m)" = arm64
+          brew install coreutils xz cmake protobuf
+          echo "$(brew --prefix coreutils)/libexec/gnubin" >> "$GITHUB_PATH"
+          rust_version=$(node -p "require('./assets/backend-source.lock.json').rust")
+          rustup toolchain install "$rust_version" --profile minimal
+          echo "RUSTUP_TOOLCHAIN=$rust_version" >> "$GITHUB_ENV"
+      - name: Validate prerelease version
+        id: version
+        run: node -e "const v=require('./package.json').version; if(!/^[0-9]+\.[0-9]+\.[0-9]+-neo\.[0-9]+$/.test(v)) throw Error('Expected a Neo prerelease version'); require('fs').appendFileSync(process.env.GITHUB_OUTPUT, 'version='+v+'\n');"
+      - run: npm ci
+      - run: npm audit --audit-level=moderate
+      - run: npm run backend:mac
+      - run: npm run build:mac
+      - name: Package and verify signed application
+        run: |
+          npx --no-install electron-builder --config.electronDist=node_modules/electron/dist --config.directories.output=release-prerelease --mac --arm64 --dir --publish never
+          app='release-prerelease/mac-arm64/Xodus Nexus Neo.app'
+          codesign --force --deep --sign - "$app"
+          codesign --verify --deep --strict "$app"
+          lipo "$app/Contents/MacOS/Xodus Nexus Neo" -verify_arch arm64
+          lipo "$app/Contents/Resources/backend/target/release/xodus-cli" -verify_arch arm64
+          lipo "$app/Contents/Resources/backend/target/release/xodus-service" -verify_arch arm64
+          lipo "$app/Contents/Resources/controllers/xodus-controller" -verify_arch arm64
+          npx --no-install electron-builder --prepackaged release-prerelease/mac-arm64 --config.directories.output=release-prerelease --mac dmg zip --arm64 --publish never
+          cd release-prerelease
+          shasum -a 256 ./*.dmg ./*.zip > SHA256SUMS.txt
+          hdiutil verify ./*.dmg
+          unzip -t ./*.zip
+      - name: Include release notes
+        run: cp RELEASE_NOTES.md release-prerelease/RELEASE_NOTES.md
+      - uses: actions/upload-artifact@v4
+        with:
+          name: neo-arm64-prerelease
+          path: |
+            release-prerelease/*.dmg
+            release-prerelease/*.zip
+            release-prerelease/SHA256SUMS.txt
+            release-prerelease/RELEASE_NOTES.md
+          if-no-files-found: error
+          retention-days: 7
+      - name: Report build failure
+        if: failure() || cancelled()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api "repos/$GITHUB_REPOSITORY/statuses/$GITHUB_SHA" -f state=failure -f context='Neo prerelease' -f description='Release build failed; see workflow logs' -f target_url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+  publish:
+    needs: build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      statuses: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: neo-arm64-prerelease
+          path: release-prerelease
+      - name: Publish GitHub prerelease
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ needs.build.outputs.version }}
+        run: |
+          cd release-prerelease
+          sha256sum --check SHA256SUMS.txt
+          tag="v$VERSION"
+          if gh release view "$tag" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo 'A release already exists for this version; refusing to overwrite it.' >&2
+            exit 1
+          fi
+          gh release create "$tag" --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --prerelease --title "Xodus Nexus Neo $VERSION" --notes-file RELEASE_NOTES.md ./*.dmg ./*.zip SHA256SUMS.txt
+      - name: Report release result
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          JOB_STATUS: ${{ job.status }}
+        run: |
+          state=failure
+          if [ "$JOB_STATUS" = success ]; then state=success; fi
+          gh api "repos/$GITHUB_REPOSITORY/statuses/$GITHUB_SHA" -f state="$state" -f context='Neo prerelease' -f description="Prerelease publication $JOB_STATUS" -f target_url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
