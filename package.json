@@ -19,8 +19,8 @@
     "pack": "npm run build && electron-builder --linux dir --publish never",
     "build:mac": "npm run build:controller:mac && npm run clean && npm run typecheck && npm run test:mac && vite build && tsc -p tsconfig.electron.json",
     "test:mac": "vitest run --config vitest.mac.config.ts",
-    "pack:mac": "npm run build:mac && electron-builder --config.electronDist=node_modules/electron/dist --mac --arm64 --dir --publish never",
-    "dist:mac": "npm run build:mac && electron-builder --config.electronDist=node_modules/electron/dist --mac --arm64 --publish never",
+    "pack:mac": "npm run build:mac && electron-builder --mac --arm64 --dir --publish never",
+    "dist:mac": "npm run build:mac && electron-builder --mac --arm64 --publish never",
     "backend:mac": "node scripts/build-backend-macos.mjs",
     "build:controller:mac": "node scripts/build-controller-macos.mjs"
   },
