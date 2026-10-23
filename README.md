@@ -20,7 +20,7 @@ Neo adds Xbox Series X|S console Remote Play, Xbox Cloud Gaming, native macOS co
 
 ## Build on Apple Silicon
 
-Requires macOS 14 or newer, Xcode Command Line Tools, Node.js 22 or newer with npm, and Rust/Cargo compatible with the pinned backend recipe. The native backend is downloaded from its pinned source and built locally; no account credentials are needed to build.
+Requires macOS 14 or newer, Xcode Command Line Tools, Node.js 22.14 or newer with npm, and Rust/Cargo compatible with the pinned backend recipe. The native backend is downloaded from its pinned source and built locally; no account credentials are needed to build.
 
 ```sh
 git clone https://github.com/northbridgetechnology/xodus-nexus-neo.git

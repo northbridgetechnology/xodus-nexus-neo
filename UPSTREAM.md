@@ -3,7 +3,7 @@
 Xodus Nexus Neo is an independent fork of **Xodus Nexus** by domsvoboda:
 https://github.com/domsvoboda/xodus-nexus
 
-The starting launcher snapshot was commit `e8f33dd` (the full revision is recorded in this fork's publication documentation). Neo adds the Apple Silicon port, console and cloud streaming, controller support, game discovery improvements and local browser caching. The initial Neo repository publishes a reviewed source snapshot rather than importing the upstream development history.
+The starting launcher snapshot was commit `e8f33dd38699b57d664a84cdffc0e0710f3df477`. Neo adds the Apple Silicon port, console and cloud streaming, controller support, game discovery improvements and local browser caching. The initial Neo repository publishes a reviewed source snapshot rather than importing the upstream development history.
 
 The underlying Xodus backend comes from https://github.com/xodus-gaming/xodus at the revision recorded in `assets/backend-source.lock.json`, with the listed Nexus patches and the native macOS build configuration. Backend sources are fetched by the build recipe and are not vendored as an untracked local checkout.
 
