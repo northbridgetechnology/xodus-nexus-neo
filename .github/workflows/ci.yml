@@ -21,6 +21,17 @@ jobs:
         with:
           node-version: '22'
           cache: npm
+      - name: Install runtime-test prerequisites
+        env:
+          HOMEBREW_NO_AUTO_UPDATE: '1'
+        run: |
+          brew install coreutils xz
+          echo "$(brew --prefix coreutils)/libexec/gnubin" >> "$GITHUB_PATH"
+      - name: Verify runtime-test prerequisites
+        run: |
+          tar --version
+          sha512sum --version
+          xz --version
       - run: npm ci
       - run: npm run build:mac
       - run: npm audit --audit-level=moderate
