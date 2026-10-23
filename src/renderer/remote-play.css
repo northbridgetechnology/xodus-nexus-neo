@@ -1,0 +1,133 @@
+.remote-page[hidden] { display: none; }
+.remote-page { max-width: 1700px; margin-inline: auto; }
+.remote-subtitle { margin: 8px 0 0; color: var(--muted); font-size: 15px; }
+.remote-source { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 13px; }
+.remote-source svg { width: 17px; color: var(--green); }
+.remote-account { display: flex; align-items: center; gap: 20px; padding: 25px; margin: 24px 0 34px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; }
+.remote-account-icon { padding: 15px; border-radius: 12px; background: #65a9451a; color: #9bce80; display: grid; place-items: center; }
+.remote-account-icon svg { width: 30px; height: 30px; }
+.remote-account-copy { flex: 1; }
+.remote-account h2 { font-size: 19px; margin: 0 0 7px; }
+.remote-account p { color: var(--muted); font-size: 14px; margin: 0; line-height: 1.5; }
+.remote-remember { display: flex; align-items: center; gap: 8px; margin-top: 13px; font-size: 13px; color: var(--muted); }
+.remote-remember input { accent-color: var(--green); width: 15px; height: 15px; }
+.remote-connected { display: inline-flex; gap: 6px; font-size: 13px; color: #9bce80; white-space: nowrap; }
+.remote-connected svg { width: 16px; height: 16px; }
+.remote-device-code { display: flex; gap: 24px; padding: 28px; margin: -10px 0 32px; background: #242e22; border: 1px solid #65a94560; border-radius: 8px; }
+.remote-device-code > svg { width: 30px; height: 30px; color: #9bce80; }
+.remote-device-code h2 { margin-top: 0; font-size: 20px; }
+.remote-device-code p { color: var(--muted); font-size: 14px; display: flex; gap: 10px; align-items: center; }
+.remote-code { display: block; font-size: 36px; letter-spacing: .15em; margin: 22px 0; font-family: 'SFMono-Regular', monospace; }
+.remote-list-tools { display: flex; gap: 16px; align-items: center; }
+.remote-list-tools label { display: flex; align-items: center; gap: 10px; color: var(--muted); font-size: 13px; }
+.remote-list-tools select { color: inherit; background: var(--surface); border: 1px solid var(--line); padding: 9px 12px; border-radius: 5px; font: inherit; }
+.remote-console-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+.remote-console { display: flex; align-items: center; gap: 20px; padding: 26px; border: 1px solid var(--line); background: var(--surface); border-radius: 8px; }
+.remote-console-icon { width: 64px; height: 64px; display: grid; place-items: center; background: #1b1e22; border-radius: 10px; color: #cdd2d8; flex-shrink: 0; }
+.remote-console-icon svg { width: 32px; height: 32px; }
+.remote-console-copy { flex: 1; min-width: 0; }
+.remote-console h3 { font-size: 18px; margin: 0 0 7px; overflow-wrap: anywhere; }
+.remote-console-copy p { color: var(--muted); font-size: 13px; margin: 4px 0 10px; }
+.remote-console-copy .remote-warning { color: #e2bb6a; font-size: 12px; line-height: 1.5; margin-bottom: 0; }
+.remote-power { display: flex; align-items: center; gap: 7px; color: var(--muted); font-size: 12px; }
+.remote-power i, .remote-indicator { display: inline-block; height: 7px; width: 7px; border-radius: 50%; background: #858b94; }
+.remote-power.online i, .remote-indicator.connected { background: var(--green); }
+.remote-empty { min-height: 230px; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 1px dashed var(--line); border-radius: 8px; text-align: center; padding: 30px; }
+.remote-empty > svg { width: 34px; height: 34px; color: var(--faint); margin-bottom: 14px; }
+.remote-empty h3 { margin: 0 0 9px; font-size: 18px; }
+.remote-empty p { margin: 0; max-width: 540px; color: var(--muted); font-size: 14px; line-height: 1.6; }
+.remote-setup { border-top: 1px solid var(--line); padding-top: 28px; margin-top: 38px; }
+.remote-setup h2 { font-size: 20px; margin-top: 0; }
+.remote-setup-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin: 24px 0; }
+.remote-setup-grid b { background: #363b42; color: #dfe3e8; width: 26px; height: 26px; border-radius: 50%; font-size: 13px; display: grid; place-items: center; }
+.remote-setup h3 { font-size: 15px; margin-bottom: 9px; }
+.remote-setup p { color: var(--muted); font-size: 13px; line-height: 1.7; }
+.remote-setup details { padding: 17px 0; border-top: 1px solid var(--line); }
+.remote-setup summary { font-size: 14px; cursor: pointer; }
+.remote-session { background: #0b0c0e; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; margin: 25px 0; }
+.remote-session:fullscreen { display: flex; flex-direction: column; border: 0; border-radius: 0; width: 100%; height: 100%; }
+.remote-streambar { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: #24272c; gap: 12px; }
+.remote-streambar > div { display: flex; gap: 10px; align-items: center; font-size: 13px; }
+.remote-streambar strong { font-weight: 600; }
+.remote-streambar span { color: var(--muted); }
+.remote-stream-actions button { background: #33383f; border: 1px solid var(--line); border-radius: 5px; min-height: 32px; padding: 6px 9px; display: inline-flex; gap: 7px; align-items: center; cursor: pointer; font-size: 12px; }
+.remote-stream-actions svg { width: 16px; height: 16px; }
+.remote-stream-actions .remote-disconnect { background: #6d2c30; color: #ffe0df; }
+.remote-screen { position: relative; width: 100%; aspect-ratio: 16/9; background: #000; min-height: 250px; }
+.remote-session:fullscreen .remote-screen { flex: 1; min-height: 0; aspect-ratio: auto; }
+.remote-media { position: absolute; inset: 0; }
+.remote-media video { display: block; width: 100% !important; height: 100% !important; object-fit: contain; }
+.remote-media audio { display: none; }
+.remote-connecting { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; background: #111318e8; padding: 28px; text-align: center; }
+.remote-connecting > svg { color: var(--green); width: 35px; height: 35px; }
+.remote-connecting h2 { font-size: 22px; margin: 20px 0 8px; }
+.remote-connecting p { color: var(--muted); font-size: 14px; margin-bottom: 24px; }
+.remote-stats { padding: 12px 16px; background: #1c1f23; display: flex; gap: 20px; align-items: center; color: var(--muted); font-size: 11px; flex-wrap: wrap; }
+.remote-stats span { display: flex; align-items: center; gap: 6px; }
+.remote-stats svg { width: 15px; height: 15px; }
+.remote-stats-hint { margin-left: auto; }
+@media (max-width: 1100px) {
+  .remote-account { flex-wrap: wrap; gap: 14px; }
+  .remote-account-copy { min-width: 220px; }
+  .remote-source { display: none; }
+  .remote-setup-grid { grid-template-columns: 1fr; gap: 8px; }
+  .remote-console-section .section-title { flex-wrap: wrap; gap: 12px; }
+  .remote-streambar { flex-wrap: wrap; }
+  .remote-streambar > div { flex-wrap: wrap; }
+}
+
+.quick-grid { grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
+.remote-controller-panel { margin-top: 30px; padding: 23px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+.remote-controller-panel header, .remote-controller-panel header > div { display: flex; gap: 12px; align-items: center; }
+.remote-controller-panel header { justify-content: space-between; flex-wrap: wrap; }
+.remote-controller-panel header > div { flex-wrap: wrap; }
+.remote-controller-panel header h2 { font-size: 18px; margin: 0; }
+.remote-controller-panel header span { color: var(--muted); font-size: 13px; }
+.remote-controller-options { display: flex; gap: 20px; flex-wrap: wrap; margin: 22px 0; }
+.remote-controller-options label { display: flex; flex-direction: column; gap: 8px; color: var(--muted); font-size: 12px; }
+.remote-controller-options select { background: #1c1f23; border: 1px solid var(--line); padding: 9px 12px; border-radius: 4px; font: inherit; color: #ddd; max-width: 100%; }
+.remote-button-test { display: flex; gap: 7px; flex-wrap: wrap; }
+.remote-button-test span { display: grid; place-items: center; min-width: 34px; height: 32px; padding: 0 8px; border: 1px solid #50555d; background: #1e2125; border-radius: 5px; font-size: 12px; color: var(--muted); }
+.remote-button-test .pressed { border-color: #b2e596; background: #4a8e2b; color: white; }
+.remote-controller-help { display: flex; gap: 10px; align-items: center; font-size: 13px; line-height: 1.6; color: var(--muted); }
+.remote-controller-help svg { width: 20px; flex-shrink: 0; }
+.remote-axis-values { font: 12px 'SFMono-Regular', monospace; color: var(--muted); }
+.remote-axis-values span { margin-left: 30px; }
+
+.cloud-catalog .section-title { flex-wrap: wrap; gap: 14px; }
+.cloud-catalog h2 small { color: var(--muted); font-size: 14px; margin-left: 10px; font-weight: 400; }
+.cloud-filters { display: flex; align-items: center; gap: 24px; margin: 20px 0; flex-wrap: wrap; }
+.cloud-filters .remote-remember { margin: 0; }
+.cloud-search { display: flex; align-items: center; gap: 12px; background: var(--surface); border: 1px solid var(--line); padding: 10px 14px; border-radius: 6px; flex: 1; min-width: 240px; }
+.cloud-search > svg { width: 19px; color: var(--muted); }
+.cloud-search input { color: inherit; background: none; border: none; outline: none; width: 100%; font: inherit; font-size: 14px; }
+.cloud-search button { background: none; border: none; color: var(--muted); cursor: pointer; padding: 0; }
+.cloud-search button svg { width: 17px; }
+.cloud-game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 22px; }
+.cloud-game { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; min-width: 0; }
+.cloud-cover { aspect-ratio: 2/3; background: linear-gradient(145deg, #263d2d, #171c24); position: relative; display: grid; place-items: center; }
+.cloud-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.cloud-cover > svg { width: 56px; height: 56px; color: #779b7c; }
+.cloud-access { position: absolute; bottom: 10px; left: 10px; padding: 5px 8px; background: #222b; color: #eee; backdrop-filter: blur(8px); border-radius: 4px; font-size: 11px; }
+.cloud-access.playable { background: #143e22ed; color: #bce8ab; }
+.cloud-game-copy { padding: 14px; }
+.cloud-game h3 { font-size: 15px; margin: 0; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 42px; }
+.cloud-game p { font-size: 12px; color: var(--muted); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; margin: 8px 0 14px; }
+.cloud-game button { width: 100%; justify-content: center; min-height: 36px; font-size: 12px; }
+.cloud-more { display: flex; justify-content: center; margin-top: 28px; }
+.cloud-notice, .cloud-loading { color: var(--muted); font-size: 13px; line-height: 1.6; }
+.cloud-loading { display: flex; gap: 10px; align-items: center; }
+.cloud-loading svg { width: 18px; }
+
+.cloud-refinements { display: grid; grid-template-columns: repeat(5, minmax(130px, 1fr)) auto; align-items: end; gap: 14px; margin: 0 0 12px; }
+.cloud-refinements label { display: flex; flex-direction: column; gap: 8px; font-size: 12px; color: var(--muted); min-width: 0; }
+.cloud-refinements select { width: 100%; min-width: 0; border: 1px solid var(--line); border-radius: 5px; background: var(--surface); color: #ddd; font: inherit; padding: 10px; text-overflow: ellipsis; }
+.cloud-filter-help { color: var(--muted); font-size: 12px; line-height: 1.6; margin: 12px 0 20px; }
+.cloud-card-meta { display: flex; flex-wrap: wrap; gap: 5px; min-height: 22px; margin: -4px 0 10px; }
+.cloud-card-meta span { font-size: 10px; color: #c3c7ce; border: 1px solid var(--line); border-radius: 3px; padding: 3px 5px; }
+.cloud-game .cloud-card-date { margin: 0 0 12px; font-size: 11px; }
+@media (max-width: 1300px) { .cloud-refinements { grid-template-columns: repeat(3, minmax(140px, 1fr)); } }
+@media (max-width: 850px) { .cloud-refinements { grid-template-columns: repeat(2, minmax(130px, 1fr)); } }
+.cloud-filter-notes { margin: -8px 0 20px; color: var(--muted); font-size: 12px; line-height: 1.6; }
+.cloud-filter-notes summary { cursor: pointer; }
+.cloud-filter-notes p { margin: 8px 0; max-width: 900px; }

@@ -1,0 +1,80 @@
+node_modules/
+dist/
+dist-electron/
+release/
+work/
+outputs/
+coverage/
+*.log
+.DS_Store
+.env
+.env.*
+!.env.example
+.agents/
+# Agent instructions and handoff state are local, not product documentation.
+/AGENTS.md
+/STATUS.md
+/docs/development/
+/docs/wiki/
+.aws/
+.codex/
+*.AppImage
+*.dll
+# Local development runtime archives (never packaged or committed)
+bundled/
+*.msixvc
+*.wgs
+# Internal engineering handoffs and diagnostics (XUIDs, private paths)
+docs/internal/
+*.backup-*
+*.tmp*
+
+# Local macOS backend sources and compiled resources
+backend/
+native-backend/
+.backend-macos-*/
+
+release-remote-play/
+
+native-controller/
+
+release-switch-pro/
+release-cloud-gaming*/
+
+release-catalog-batches/
+
+release-catalog-filters/
+
+release-game-hub/
+
+# Every local build variant, not just specifically named previews.
+/release*/
+/build-output/
+/target/
+/.backend-macos-*/
+*.app/
+*.dmg
+*.zip
+*.tar.gz
+*.tar.xz
+*.p12
+*.pfx
+*.pem
+*.key
+*.mobileprovision
+*.enc
+*.keychain*
+*.sqlite*
+*.db
+# Electron profiles, account data, and developer-specific configuration.
+/User Data/
+/profiles/
+/remote-play/
+/account*.json
+/game-hub.json
+/window-state.json
+/state.json
+.npmrc
+.yarnrc.yml
+.idea/
+.vscode/
