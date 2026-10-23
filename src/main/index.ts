@@ -1709,8 +1709,14 @@ async function createWindow(): Promise<void> {
 
 app.whenReady().then(async () => {
   if (!primaryInstance) return;
+  app.setAboutPanelOptions({ applicationName: 'Xodus Nexus Neo' });
   if (process.platform === 'darwin') Menu.setApplicationMenu(Menu.buildFromTemplate([
-    { role: 'appMenu', label: 'Xodus Nexus Neo' }, { role: 'editMenu' }, { role: 'viewMenu' },
+    { label: 'Xodus Nexus Neo', submenu: [
+      { role: 'about', label: 'About Xodus Nexus Neo' }, { type: 'separator' },
+      { role: 'services' }, { type: 'separator' },
+      { role: 'hide', label: 'Hide Xodus Nexus Neo' }, { role: 'hideOthers' }, { role: 'unhide' },
+      { type: 'separator' }, { role: 'quit', label: 'Quit Xodus Nexus Neo' },
+    ] }, { role: 'editMenu' }, { role: 'viewMenu' },
     { label: 'Xbox', submenu: [
       { label: 'Remote Play', accelerator: 'CmdOrCtrl+Shift+R', click: () => remotePlayMenu('show') },
       { label: 'Refresh Consoles', click: () => remotePlayMenu('refresh') },
