@@ -48,7 +48,7 @@ jobs:
       - run: npm run build:mac
       - name: Package and verify signed application
         run: |
-          npx --no-install electron-builder --config.electronDist=node_modules/electron/dist --config.directories.output=release-prerelease --mac --arm64 --dir --publish never
+          npx --no-install electron-builder --config.directories.output=release-prerelease --mac --arm64 --dir --publish never
           app='release-prerelease/mac-arm64/Xodus Nexus Neo.app'
           codesign --force --deep --sign - "$app"
           codesign --verify --deep --strict "$app"
